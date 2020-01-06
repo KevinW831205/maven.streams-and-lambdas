@@ -39,7 +39,12 @@ public final class PersonFactory {
      * @return - ArrayList of Person objects
      */ // TODO
     public List<Person> createPersonList(int listSize) {
-        return new ArrayList<>();
+        List<Person> personList = new ArrayList<>();
+        for(int i=0; i<listSize;i++){
+            personList.add(new Person(null,null,null,null,null));
+        }
+        return personList;
+
     }
 
 

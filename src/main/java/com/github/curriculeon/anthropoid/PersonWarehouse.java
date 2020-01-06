@@ -1,8 +1,8 @@
 package com.github.curriculeon.anthropoid;
 
+import com.github.curriculeon.tools.ReflectionUtils;
 import com.github.curriculeon.tools.logging.LoggerHandler;
 import com.github.curriculeon.tools.logging.LoggerWarehouse;
-import com.github.curriculeon.tools.ReflectionUtils;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -42,7 +42,10 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return list of uniquely named Person objects
      */ //TODO
     public Stream<Person> getUniquelyNamedPeople() {
-        return null;
+        List<String> uniqueNames = new ArrayList<>();
+        return people.stream()
+                .filter(p->!uniqueNames.add(p.getName()));
+
     }
 
 
@@ -51,7 +54,8 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return a Stream of respective
      */ //TODO
     public Stream<Person> getUniquelyNamedPeopleStartingWith(Character character) {
-        return null;
+        return people.stream()
+                .filter(p->p.getName().charAt(0)==character);
     }
 
     /**
