@@ -5,6 +5,8 @@ import com.github.curriculeon.tools.logging.LoggerHandler;
 import com.github.curriculeon.tools.logging.LoggerWarehouse;
 
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -42,9 +44,22 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return list of uniquely named Person objects
      */ //TODO
     public Stream<Person> getUniquelyNamedPeople() {
-        List<String> uniqueNames = new ArrayList<>();
-        return people.stream()
-                .filter(p->!uniqueNames.add(p.getName()));
+
+//        return people.stream()
+//                .collect(Collectors.groupingBy(Function.identity(),Collectors.counting()))
+//                .entrySet()
+//                .stream()
+//                .filter(e->e.getValue() ==1)
+//                .map(e->e.getKey());
+
+        Set<String> uniqueName = new HashSet<>();
+        List<Person> peopleWithUniqueName = new ArrayList<>();
+        for(Person p : people){
+            if (uniqueName.add(p.getName())) {
+                peopleWithUniqueName.add(p);
+            }
+        }
+        return peopleWithUniqueName.stream();
 
     }
 
@@ -63,7 +78,8 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return a Stream of respective
      */ //TODO
     public Stream<Person> getFirstNUniquelyNamedPeople(int n) {
-        return null;
+        return getUniquelyNamedPeople()
+                .limit(n);
     }
 
     /**
