@@ -14,9 +14,7 @@ import java.util.stream.Stream;
  * @ATTENTION_TO_STUDENTS You are FORBIDDEN from using loops of any sort within the definition of this class.
  */
 public final class PersonFactory {
-    public PersonFactory() {
-        /** this class is not to be instantiated */
-    }
+
 
     /**
      * @return a new instance of a person with fields of random values
@@ -44,7 +42,6 @@ public final class PersonFactory {
             personList.add(createRandomPerson());
         }
         return personList;
-
     }
 
 
