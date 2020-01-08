@@ -4,6 +4,7 @@ import com.github.curriculeon.anthropoid.Person;
 import com.github.curriculeon.anthropoid.PersonFactory;
 
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,18 +24,20 @@ public final class StreamConverter extends PersonConversionAgent<Stream<Person>>
                 .limit(collectionSize));
     }
 
+    private Supplier<Stream<Person>> streamSupplier = ()-> super.objectSequence;
+
     // TODO
     public List<Person> toList() {
-        return null;
+        return streamSupplier.get().collect(Collectors.toList());
     }
 
     // TODO
     public Stream<Person> toStream() {
-        return null;
+        return streamSupplier.get();
     }
 
     // TODO
     public Person[] toArray() {
-        return null;
+        return streamSupplier.get().toArray((size)-> new Person[size]);
     }
 }
